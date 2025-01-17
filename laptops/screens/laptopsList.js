@@ -1,9 +1,9 @@
 import { View, Text, StyleSheet, FlatList } from "react-native"
-import { Button, ListItem, Avatar, Icon } from "@rneui/base";
+import { Button, ListItem, Avatar, FAB } from "@rneui/base";
 import { getAllLaptops } from "../rest_laptops/laptops";
 import { useState } from "react";
 
-export const LaptopList = () => {
+export const LaptopList = ({navigation}) => {
     const [laptopsList, setLaptopsList] = useState([]);
     const LaptopItem = ({ laptop }) => {
         return <ListItem>
@@ -24,13 +24,16 @@ export const LaptopList = () => {
         <FlatList data={laptopsList} renderItem={({ item }) => {
             return <LaptopItem laptop={item} />
         }} />
+        <FAB title="+" onPress={() => { navigation.navigate("LaptopFormNav") }} />
     </View>)
 }
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'mediumpurple',
-        padding: '10'
+        padding: '10',
+        alignItems: 'stretch',
+        justifyContent: 'flex-start',
     },
     list: {
         backgroundColor: 'orchid',
@@ -40,7 +43,7 @@ const styles = StyleSheet.create({
     listItem: {
         margin: '10',
     },
-    title:{
+    title: {
         fontSize: 40,
         textAlign: 'center',
         marginVertical: 20,
